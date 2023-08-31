@@ -1,5 +1,6 @@
 <template>
-  <h1>Rhys & Zach</h1>
+  <h1>Rhys & Zach's Games</h1>
+  <p>test text</p>
 </template>
 
 <script>
@@ -11,4 +12,8 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+p {
+  color: $yellow;
+}
+</style>

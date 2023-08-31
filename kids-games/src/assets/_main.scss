@@ -1,0 +1,15 @@
+@import "@/assets/_shared.scss";
+
+h1 {
+  font-family: $kavoon;
+  font-size: 48px;
+  color: $yellow;
+}
+
+body {
+  background: rgb(83,86,176);
+  background: linear-gradient(0deg, rgba(83,86,176,1) 16%, rgba(25,29,136,1) 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
