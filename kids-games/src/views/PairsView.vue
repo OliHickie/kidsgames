@@ -10,6 +10,28 @@
         </div>
       </div>
     </div>
+    <div v-if="showPlayerNames" class="playerNames">
+      <div class="playerNames__form">
+        <label for="player1">Player 1 Name:</label>
+        <input
+          type="text"
+          id="player1"
+          v-model="player1Name"
+          placeholder="Enter Player 1 Name"
+        />
+
+        <label for="player2">Player 2 Name:</label>
+        <input
+          type="text"
+          id="player2"
+          v-model="player2Name"
+          placeholder="Enter Player 2 Name"
+        />
+
+        <button @click="startGame">Start Game</button>
+
+      </div>
+    </div>
   </div>
 </template>
 
@@ -23,6 +45,10 @@ export default {
   setup() {
     const content = ref(null);
     const selectedCards = ref([]);
+    const showPlayerNames = ref(false);
+    const player1Name = ref('');
+    const player2Name = ref('');
+    const playersTurn = player1Name.value;
 
     const getModeFromQuery = computed(() => {
       const query = useRoute().query.mode;
@@ -36,6 +62,7 @@ export default {
     })
 
     const shuffledContent = onMounted(() => {
+      showPlayerNames.value = true;
       const mode = getModeFromQuery;
       const copyContent = Array(4).fill(mode.value).flat();
       for (let i = copyContent.length - 1; i > 0; i--) {
@@ -47,6 +74,10 @@ export default {
         hide: true,
       }));
     });
+
+    function startGame() {
+      showPlayerNames.value = false;
+    }
 
     function turnCard(ev, card, i) {
       if (selectedCards.value.length < 2) {
@@ -90,6 +121,11 @@ export default {
       getBackground,
       turnCard,
       content,
+      showPlayerNames,
+      startGame,
+      player1Name,
+      player2Name,
+      playersTurn,
     };
   },
 };
@@ -135,6 +171,31 @@ $border-radius: 20px;
     justify-content: center;
     align-items: center;
   }
+}
 
+.playerNames {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &__form {
+    background-color: $darkBlue;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    & label {
+      color: $white;
+      margin: 10px;
+    }
+    & button {
+      margin-top: 16px;
+    }
+  }
 }
 </style>
