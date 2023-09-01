@@ -29,7 +29,7 @@ export default {
 
     function turnCard(ev, card, i) {
       if (selectedCards.value.length < 2) {
-        selectedCards.value.push(card);
+        selectedCards.value.push({card: card, index: i});
         ev.target.style.transform = 'rotateY(180deg)';
         setTimeout(() => {
           content.value[i].hide = false;
@@ -37,17 +37,17 @@ export default {
         if (selectedCards.value.length == 2) {
           setTimeout(() => {
           checkCards()
-          }, 1000);
+          }, 1500);
         }
       }
     }
 
     function checkCards() {
-      const cards = selectedCards.value;
-      if (cards[0].id != cards[1].id) {
-        content.value.forEach((card) => {
-          card.hide = true;
-        })
+      const cardA = selectedCards.value[0];
+      const cardB = selectedCards.value[1];
+      if (cardA.card.id != cardB.card.id) {
+        content.value[cardA.index].hide = true;
+        content.value[cardB.index].hide = true;
       }
       selectedCards.value = [];
     }
