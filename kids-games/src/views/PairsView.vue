@@ -1,8 +1,9 @@
 <template>
   <div class="pairs">
-    <div class="pairs__container">
-      <div v-for="(card, i) in shuffledContent" :key="i">
-        <div class="card" :style="getBackground(card)" />
+    <div v-if="content" class="pairs__container">
+      <div v-for="(card, i) in content" :key="i">
+        <div v-if="card.hide" :ref="i" class="card hidden" @click="turnCard($event, card, i)" />
+        <div v-else :ref="i" class="card" :style="getBackground(card)" />
       </div>
     </div>
   </div>
@@ -10,30 +11,58 @@
 
 <script>
 import Marvel from '../content/marvel';
-import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue';
+import { ref, computed, onMounted, onBeforeUnmount, watch, Vue } from 'vue';
 
 export default {
   setup() {
-    const content = Array(4).fill(Marvel.characters).flat();
+    const content = ref(null);
+    const selectedCards = ref([]);
 
-    const shuffledContent = computed(() => {
-      const copyContent = [...content];
+    const shuffledContent = onMounted(() => {
+      const copyContent = Array(4).fill(Marvel.characters).flat();
       for (let i = copyContent.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [copyContent[i], copyContent[j]] = [copyContent[j], copyContent[i]];
       }
-      return copyContent;
+      content.value = copyContent.map((card) => ({ ...card, hide: true }));
     });
 
-    const getBackground = (card) => {
+    function turnCard(ev, card, i) {
+      if (selectedCards.value.length < 2) {
+        selectedCards.value.push(card);
+        ev.target.style.transform = 'rotateY(180deg)';
+        setTimeout(() => {
+          content.value[i].hide = false;
+        }, 200);
+        if (selectedCards.value.length == 2) {
+          setTimeout(() => {
+          checkCards()
+          }, 1000);
+        }
+      }
+    }
+
+    function checkCards() {
+      const cards = selectedCards.value;
+      if (cards[0].id != cards[1].id) {
+        content.value.forEach((card) => {
+          card.hide = true;
+        })
+      }
+      selectedCards.value = [];
+    }
+
+    function getBackground(card) {
       return {
         backgroundImage: `url(${card.image})`,
       };
-    };
+    }
 
     return {
       shuffledContent,
       getBackground,
+      turnCard,
+      content,
     };
   },
 };
@@ -60,6 +89,12 @@ export default {
   border-radius: 20px;
   margin-right: 16px;
   margin-bottom: 16px;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
   // border: 1px solid grey;
+  &.hidden {
+    background-image: url("https://img.favpng.com/16/13/18/captain-america-s-shield-black-widow-s-h-i-e-l-d-png-favpng-vLfB5VzBSmf3BphnUiBbrdMYP.jpg");
+  }
+
 }
 </style>

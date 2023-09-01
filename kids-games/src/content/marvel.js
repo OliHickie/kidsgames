@@ -47,25 +47,5 @@ export default {
       image:
         "https://www.transparentpng.com/thumb/ant-man/nr2FIW-download-ant-man-offense-.png",
     },
-    // {
-    //   id: 9,
-    //   name: ,
-    //   image: ,
-    // },
-    // {
-    //   id: 10,
-    //   name: ,
-    //   image: ,
-    // },
-    // {
-    //   id: 11,
-    //   name: ,
-    //   image: ,
-    // },
-    // {
-    //   id: 12,
-    //   name: ,
-    //   image: ,
-    // },
   ],
 };
