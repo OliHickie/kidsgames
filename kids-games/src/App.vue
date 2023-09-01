@@ -1,9 +1,11 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/pairs">Pairs</router-link>
-  </nav>
-  <router-view />
+  <div>
+    <nav>
+      <router-link to="/">Home</router-link> |
+      <router-link to="/pairs">Pairs</router-link>
+    </nav>
+    <router-view />
+  </div>
 </template>
 
 <style>
