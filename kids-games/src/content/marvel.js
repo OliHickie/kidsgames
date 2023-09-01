@@ -1,5 +1,4 @@
-export default {
-  characters: [
+export default [
     {
       id: 1,
       name: "Captain America",
@@ -47,5 +46,4 @@ export default {
       image:
         "https://www.transparentpng.com/thumb/ant-man/nr2FIW-download-ant-man-offense-.png",
     },
-  ],
-};
+  ];
