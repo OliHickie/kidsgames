@@ -1,14 +1,28 @@
 <template>
-  <h1>Rhys & Zach's Games</h1>
-  <p>test text</p>
+  <div>
+    <h1>Rhys & Zach's Games</h1>
+    <button @click="marvelPairs()">
+      Marvel Pairs
+    </button>
+  </div>
+  
 </template>
 
 <script>
-// @ is an alias to /src
+import router from '@/router';
+
 
 export default {
   name: "HomeView",
   components: {},
+  setup() {
+    const marvelPairs = () => {
+      router.push({ name: 'pairs', query: { mode: 'marvel'}})
+    }
+    return {
+      marvelPairs,
+    }; 
+  }
 };
 </script>
 
