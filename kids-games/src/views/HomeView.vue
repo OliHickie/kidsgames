@@ -1,8 +1,11 @@
 <template>
   <div>
     <h1>Rhys & Zach's Games</h1>
-    <button @click="marvelPairs()">
+    <button @click="pairs('marvel')">
       Marvel Pairs
+    </button>
+    <button @click="pairs('colours')">
+      Colours Pairs
     </button>
   </div>
   
@@ -16,11 +19,11 @@ export default {
   name: "HomeView",
   components: {},
   setup() {
-    const marvelPairs = () => {
-      router.push({ name: 'pairs', query: { mode: 'marvel'}})
+    const pairs = (mode) => {
+      router.push({ name: 'pairs', query: { mode: mode}})
     }
     return {
-      marvelPairs,
+      pairs,
     }; 
   }
 };

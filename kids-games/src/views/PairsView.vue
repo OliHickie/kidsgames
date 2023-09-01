@@ -15,6 +15,7 @@
 
 <script>
 import Marvel from '../content/marvel';
+import Colours from '../content/colours';
 import { useRoute } from 'vue-router';
 import { ref, computed, onMounted, onBeforeUnmount, watch, Vue } from 'vue';
 
@@ -28,6 +29,8 @@ export default {
       switch(query) {
         case 'marvel':
           return Marvel;
+        case 'colours':
+          return Colours;
         default:
       }
     })
@@ -106,7 +109,7 @@ $border-radius: 20px;
   }
 }
 .card {
-  background-color: $blue;
+  background-color: $white;
   height: 20vh;
   width: 15vh;
   background-size: cover;
